@@ -19,7 +19,6 @@ SELECT first_name, salary,
 FROM employee_salary;
 
 # Variation 3: Using FROM statement
-# 
 SELECT gender, AVG(age), MAX(age), MIN(age), COUNT(age)
 FROM employee_demographics
 GROUP BY gender;
@@ -31,10 +30,17 @@ GROUP BY gender) AS Agg_Table
 GROUP BY gender;
 
 # I am a lil confused here:
+# Back ticks `` are used differntly as '' quotes, this just retains the name and not the agg. function
 SELECT gender, AVG(`MAX(age)`) FROM (SELECT gender, AVG(age), MAX(age), MIN(age), COUNT(age)
 FROM employee_demographics
 GROUP BY gender) AS Agg_Table
 GROUP BY gender;
+
+# we dont want gender grouping. JUST AVG grouping
+SELECT AVG(max_age) FROM (SELECT gender, AVG(age) AS avg_age, MAX(age) AS max_age, MIN(age) AS min_age, COUNT(age)
+FROM employee_demographics
+GROUP BY gender) AS Agg_Table;
+
 
 
 
